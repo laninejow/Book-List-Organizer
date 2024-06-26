@@ -4,27 +4,22 @@ import { BookContext } from '../components/BookContext';
 import { Entypo } from '@expo/vector-icons';
 import theme from '../theme';
 
-  export default function FinishedReading({ navigation }) {
-    const { books, moveBook, deleteBook } = useContext(BookContext);
-    const [selectedBook, setSelectedBook] = useState(null);
-  
-    const handleMoveTo = (id, status) => {
-      moveBook(id, status);
-      setSelectedBook(null); // Close dropdown
-    };
-  
-    const handleDelete = (id) => {
-      deleteBook(id);
-      setSelectedBook(null); // Close dropdown
-    };
-  
-    const toggleDropdown = (id) => {
-      setSelectedBook(selectedBook === id ? null : id);
-    };
-  
-    const closeDropdown = () => {
-      setSelectedBook(null);
-    };
+export default function FinishedReading({ navigation }) {
+  const { books, deleteBook } = useContext(BookContext);
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const handleDelete = (id) => {
+    deleteBook(id);
+    setSelectedBook(null); // Close dropdown
+  };
+
+  const toggleDropdown = (id) => {
+    setSelectedBook(selectedBook === id ? null : id);
+  };
+
+  const closeDropdown = () => {
+    setSelectedBook(null);
+  };
 
   return (
     <TouchableOpacity style={styles.container} activeOpacity={1} onPress={closeDropdown}>
@@ -45,6 +40,10 @@ import theme from '../theme';
             </TouchableOpacity>
             {selectedBook === item.id && (
               <View style={styles.dropdown}>
+                <Text style={styles.dropdownText}>Currently Reading</Text>
+                <View style={styles.separator} />
+                <Text style={styles.dropdownText}>Finished Reading</Text>
+                <View style={styles.separator} />
                 <Text onPress={() => handleDelete(item.id)} style={[styles.dropdownText, styles.delete]}>Delete</Text>
               </View>
             )}
@@ -106,9 +105,15 @@ const styles = StyleSheet.create({
     borderColor: theme.borderColor,
     padding: 8,
     zIndex: 1,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   dropdownText: {
     color: theme.textColor,
+    paddingVertical: 4,
   },
   separator: {
     height: 1,
