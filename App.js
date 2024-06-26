@@ -7,6 +7,7 @@ import AddBook from './screens/AddBook';
 import ToBeRead from './screens/ToBeRead';
 import CurrentlyReading from './screens/CurrentlyReading';
 import FinishedReading from './screens/FinishedReading';
+import theme from './theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,15 @@ export default function App() {
   return (
     <BookProvider>
       <NavigationContainer>
-        <Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={{
+            tabBarActiveTintColor: theme.primaryColor,
+            tabBarInactiveTintColor: theme.textColor,
+            tabBarStyle: {
+              backgroundColor: theme.secondaryColor,
+            },
+          }}
+        >
           <Tab.Screen
             name="AddBook"
             component={AddBook}
@@ -30,7 +39,7 @@ export default function App() {
               tabBarIcon: ({ focused }) => (
                 <Image
                   source={icons.AddBook}
-                  style={{ width: 24, height: 24, tintColor: focused ? '#0000dd' : '#c6c5ed' }}
+                  style={{ width: 24, height: 24, tintColor: focused ? theme.primaryColor : theme.textColor }}
                 />
               ),
             }}
@@ -43,7 +52,7 @@ export default function App() {
               tabBarIcon: ({ focused }) => (
                 <Image
                   source={icons.ToBeRead}
-                  style={{ width: 24, height: 24, tintColor: focused ? '#0000dd' : '#c6c5ed' }}
+                  style={{ width: 24, height: 24, tintColor: focused ? theme.primaryColor : theme.textColor }}
                 />
               ),
             }}
@@ -56,7 +65,7 @@ export default function App() {
               tabBarIcon: ({ focused }) => (
                 <Image
                   source={icons.CurrentlyReading}
-                  style={{ width: 24, height: 24, tintColor: focused ? '#0000dd' : '#c6c5ed' }}
+                  style={{ width: 24, height: 24, tintColor: focused ? theme.primaryColor : theme.textColor }}
                 />
               ),
             }}
@@ -69,7 +78,7 @@ export default function App() {
               tabBarIcon: ({ focused }) => (
                 <Image
                   source={icons.FinishedReading}
-                  style={{ width: 24, height: 24, tintColor: focused ? '#0000dd' : '#c6c5ed' }}
+                  style={{ width: 24, height: 24, tintColor: focused ? theme.primaryColor : theme.textColor }}
                 />
               ),
             }}

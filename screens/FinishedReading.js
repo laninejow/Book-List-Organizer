@@ -2,23 +2,29 @@ import React, { useContext, useState } from 'react';
 import { View, Text, FlatList, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import { BookContext } from '../components/BookContext';
 import { Entypo } from '@expo/vector-icons';
+import theme from '../theme';
 
-export default function FinishedReading({ navigation }) {
-  const { books, deleteBook } = useContext(BookContext);
-  const [selectedBook, setSelectedBook] = useState(null);
-
-  const handleDelete = (id) => {
-    deleteBook(id);
-    setSelectedBook(null); // Close dropdown
-  };
-
-  const toggleDropdown = (id) => {
-    setSelectedBook(selectedBook === id ? null : id);
-  };
-
-  const closeDropdown = () => {
-    setSelectedBook(null);
-  };
+  export default function FinishedReading({ navigation }) {
+    const { books, moveBook, deleteBook } = useContext(BookContext);
+    const [selectedBook, setSelectedBook] = useState(null);
+  
+    const handleMoveTo = (id, status) => {
+      moveBook(id, status);
+      setSelectedBook(null); // Close dropdown
+    };
+  
+    const handleDelete = (id) => {
+      deleteBook(id);
+      setSelectedBook(null); // Close dropdown
+    };
+  
+    const toggleDropdown = (id) => {
+      setSelectedBook(selectedBook === id ? null : id);
+    };
+  
+    const closeDropdown = () => {
+      setSelectedBook(null);
+    };
 
   return (
     <TouchableOpacity style={styles.container} activeOpacity={1} onPress={closeDropdown}>
@@ -35,11 +41,11 @@ export default function FinishedReading({ navigation }) {
               <Text style={styles.author}>{item.author}</Text>
             </View>
             <TouchableOpacity style={styles.moreButton} onPress={() => toggleDropdown(item.id)}>
-              <Entypo name="dots-three-vertical" size={24} color="black" />
+              <Entypo name="dots-three-vertical" size={24} color={theme.textColor} />
             </TouchableOpacity>
             {selectedBook === item.id && (
               <View style={styles.dropdown}>
-                <Text onPress={() => handleDelete(item.id)} style={styles.delete}>Delete</Text>
+                <Text onPress={() => handleDelete(item.id)} style={[styles.dropdownText, styles.delete]}>Delete</Text>
               </View>
             )}
           </View>
@@ -53,11 +59,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: theme.backgroundColor,
   },
   bookItem: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 8,
+    backgroundColor: theme.secondaryColor,
+    padding: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   coverImage: {
     width: 60,
@@ -74,10 +88,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: theme.textColor,
   },
   author: {
     fontSize: 14,
-    color: 'gray',
+    color: theme.textColor,
   },
   moreButton: {
     padding: 8,
@@ -86,18 +101,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 24,
-    backgroundColor: 'white',
+    backgroundColor: theme.secondaryColor,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: theme.borderColor,
     padding: 8,
     zIndex: 1,
   },
+  dropdownText: {
+    color: theme.textColor,
+  },
   separator: {
     height: 1,
-    backgroundColor: '#ccc',
+    backgroundColor: theme.borderColor,
     marginVertical: 4,
   },
   delete: {
-    color: 'red',
+    color: theme.deleteColor,
   },
 });

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { BookContext } from '../components/BookContext';
+import theme from '../theme';
 
 export default function AddBook({ navigation }) {
   const { addBook } = useContext(BookContext);
@@ -40,7 +41,7 @@ export default function AddBook({ navigation }) {
       <TextInput style={styles.input} value={title} onChangeText={setTitle} />
       <Text>Author</Text>
       <TextInput style={styles.input} value={author} onChangeText={setAuthor} />
-      <Button title="Add Book" onPress={handleAddBook} />
+      <Button title="Add Book" onPress={handleAddBook} color={theme.primaryColor} />
     </View>
   );
 }
@@ -49,10 +50,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: theme.backgroundColor,
   },
   input: {
     borderWidth: 1,
+    borderColor: theme.borderColor,
     padding: 8,
     marginVertical: 8,
+    backgroundColor: theme.secondaryColor,
   },
 });
