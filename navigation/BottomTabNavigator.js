@@ -2,9 +2,8 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Use MaterialIcons for simplicity
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import SplashScreen from '../screens/SplashScreen';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import SearchResultsScreen from '../screens/SearchResultsScreen';
@@ -35,7 +34,7 @@ const MainTabScreen = () => (
       },
     })}
     tabBarOptions={{
-      activeTintColor: 'black',
+      activeTintColor: 'tomato',
       inactiveTintColor: 'gray',
     }}
   >
@@ -47,8 +46,7 @@ const MainTabScreen = () => (
 
 const AppNavigator = () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="Splash">
-      <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={MainTabScreen} options={{ headerShown: false }} />
       <Stack.Screen name="SearchResults" component={SearchResultsScreen} />
       <Stack.Screen name="BookDetails" component={BookDetailsScreen} />
