@@ -10,7 +10,6 @@ const { width, height } = Dimensions.get('window');
 const BookOrganizerScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Book Shelf</Text>
       <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Favorites')}>
         <ImageBackground
           source={favoritesImage}
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end', // Align content to the bottom
   },
   textContainer: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+   
     padding: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
