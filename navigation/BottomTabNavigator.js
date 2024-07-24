@@ -9,7 +9,7 @@ import SearchScreen from '../screens/SearchScreen';
 import SearchResultsScreen from '../screens/SearchResultsScreen';
 import BookDetailsScreen from '../screens/BookDetailsScreen';
 import BookOrganizerScreen from '../screens/BookOrganizerScreen';
-import FavoritesScreen from '../screens/FavoritesScreen';
+import FavouritesScreen from '../screens/FavouritesScreen';
 import CurrentlyReadingScreen from '../screens/CurrentlyReadingScreen';
 import ReadScreen from '../screens/ReadScreen';
 
@@ -50,7 +50,7 @@ const AppNavigator = () => (
       <Stack.Screen name="Home" component={MainTabScreen} options={{ headerShown: false }} />
       <Stack.Screen name="SearchResults" component={SearchResultsScreen} />
       <Stack.Screen name="BookDetails" component={BookDetailsScreen} />
-      <Stack.Screen name="Favorites" component={FavoritesScreen} />
+      <Stack.Screen name="Favourites" component={FavouritesScreen} />
       <Stack.Screen name="CurrentlyReading" component={CurrentlyReadingScreen} />
       <Stack.Screen name="Read" component={ReadScreen} />
     </Stack.Navigator>

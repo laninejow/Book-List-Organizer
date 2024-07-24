@@ -17,7 +17,7 @@ const SearchScreen = ({ navigation }) => {
         value={query}
         onChangeText={setQuery}
       />
-      <Button title="Search" onPress={handleSearch} />
+      <Button title="Search" onPress={handleSearch} color="black" />
     </View>
   );
 };

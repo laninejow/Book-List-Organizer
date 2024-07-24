@@ -3,25 +3,25 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Modal, Alert } from
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const FavoritesScreen = ({ navigation }) => {
-  const [favorites, setFavorites] = useState([]);
+const FavouritesScreen = ({ navigation }) => {
+  const [favourites, setFavourites] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const fetchFavorites = async () => {
+    const fetchFavourites = async () => {
       try {
-        const favorites = await AsyncStorage.getItem('favorites');
-        if (favorites) {
-          setFavorites(JSON.parse(favorites));
+        const favourites = await AsyncStorage.getItem('favourites');
+        if (favourites) {
+          setFavourites(JSON.parse(favourites));
         }
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchFavorites();
+    fetchFavourites();
   }, []);
 
   const openModal = (book, event) => {
@@ -33,9 +33,9 @@ const FavoritesScreen = ({ navigation }) => {
 
   const moveToCategory = async (category) => {
     try {
-      let updatedFavorites = favorites.filter(item => item.id !== selectedBook.id);
-      await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-      setFavorites(updatedFavorites);
+      let updatedFavourites = favourites.filter(item => item.id !== selectedBook.id);
+      await AsyncStorage.setItem('favourites', JSON.stringify(updatedFavourites));
+      setFavourites(updatedFavourites);
 
       const categoryItems = await AsyncStorage.getItem(category);
       let categoryArray = categoryItems ? JSON.parse(categoryItems) : [];
@@ -49,9 +49,9 @@ const FavoritesScreen = ({ navigation }) => {
 
   const deleteBook = async () => {
     try {
-      let updatedFavorites = favorites.filter(item => item.id !== selectedBook.id);
-      await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-      setFavorites(updatedFavorites);
+      let updatedFavourites = favourites.filter(item => item.id !== selectedBook.id);
+      await AsyncStorage.setItem('favourites', JSON.stringify(updatedFavourites));
+      setFavourites(updatedFavourites);
       setModalVisible(false);
     } catch (error) {
       console.error(error);
@@ -84,11 +84,11 @@ const FavoritesScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {favorites.length === 0 ? (
-        <Text style={styles.noBooks}>No favorite books</Text>
+      {favourites.length === 0 ? (
+        <Text style={styles.noBooks}>No favourite books</Text>
       ) : (
         <FlatList
-          data={favorites}
+          data={favourites}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
         />
@@ -167,4 +167,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FavoritesScreen;
+export default FavouritesScreen;

@@ -12,6 +12,7 @@ const HomeScreen = ({ navigation }) => {
   const [mystery, setMystery] = useState([]);
   const [fantasy, setFantasy] = useState([]);
 
+  // Fetch books for each category from Google Book API 
   useEffect(() => {
     fetchBooks('fiction', setRecommended);
     fetchBooks('best sellers', setTopRated);
@@ -23,18 +24,19 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   const fetchBooks = (query, setState) => {
+  // Fetch book information: author, publisher and description to display
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=5`)
       .then(response => response.json())
       .then(data => setState(data.items.filter(item => item.volumeInfo.imageLinks?.thumbnail) || []))
       .catch(error => console.error(error));
   };
-
+  // Display book covers for each book
   const renderBookItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('BookDetails', { book: item })}>
       <Image source={{ uri: item.volumeInfo.imageLinks.thumbnail }} style={styles.bookCover} />
     </TouchableOpacity>
   );
-
+  // Display data in rows by category
   return (
     <ScrollView style={styles.container}>
       <ImageBackground

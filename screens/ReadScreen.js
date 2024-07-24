@@ -101,8 +101,8 @@ const ReadScreen = ({ navigation }) => {
       >
         <TouchableOpacity style={styles.modalOverlay} onPress={() => setModalVisible(false)}>
           <View style={[styles.modalContent, { top: modalPosition.y, left: modalPosition.x - 150 }]}>
-            <TouchableOpacity style={styles.modalItem} onPress={() => moveToCategory('favorites')}>
-              <Text style={styles.modalText}>Move to Favorites</Text>
+            <TouchableOpacity style={styles.modalItem} onPress={() => moveToCategory('favourites')}>
+              <Text style={styles.modalText}>Move to Favourites</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalItem} onPress={() => moveToCategory('currentlyReading')}>
               <Text style={styles.modalText}>Move to Currently Reading</Text>
@@ -168,3 +168,4 @@ const styles = StyleSheet.create({
 });
 
 export default ReadScreen;
+

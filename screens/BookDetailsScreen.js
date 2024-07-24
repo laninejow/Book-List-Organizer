@@ -5,37 +5,38 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const BookDetailsScreen = ({ route }) => {
   const { book } = route.params;
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
-    const checkFavorite = async () => {
+    const checkFavourite = async () => {
       try {
-        const favorites = await AsyncStorage.getItem('favorites');
-        if (favorites) {
-          const favoritesArray = JSON.parse(favorites);
-          const isFav = favoritesArray.some(favBook => favBook.id === book.id);
-          setIsFavorite(isFav);
+        const favourites = await AsyncStorage.getItem('favourites');
+        if (favourites) {
+          const favouritesArray = JSON.parse(favourites);
+          const isFav = favouritesArray.some(favBook => favBook.id === book.id);
+          setIsFavourite(isFav);
         }
       } catch (error) {
         console.error(error);
       }
     };
 
-    checkFavorite();
+    checkFavourite();
   }, [book.id]);
 
-  const toggleFavorite = async () => {
+  // Ability to add book to favourites list
+  const toggleFavourite = async () => {
     try {
-      const favorites = await AsyncStorage.getItem('favorites');
-      let favoritesArray = favorites ? JSON.parse(favorites) : [];
-      if (isFavorite) {
-        favoritesArray = favoritesArray.filter(favBook => favBook.id !== book.id);
+      const favourites = await AsyncStorage.getItem('favourites');
+      let favouritesArray = favourites ? JSON.parse(favourites) : [];
+      if (isFavourite) {
+        favouritesArray = favouritesArray.filter(favBook => favBook.id !== book.id);
       } else {
-        favoritesArray.push(book);
+        favouritesArray.push(book);
       }
-      await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
-      setIsFavorite(!isFavorite);
-      alert(isFavorite ? 'Book removed from favorites' : 'Book added to favorites');
+      await AsyncStorage.setItem('favourites', JSON.stringify(favouritesArray));
+      setIsFavourite(!isFavourite);
+      alert(isFavourite ? 'Book removed from favourites' : 'Book added to favourites');
     } catch (error) {
       console.error(error);
     }
@@ -52,8 +53,8 @@ const BookDetailsScreen = ({ route }) => {
         <Text style={styles.heading}>Publisher: <Text style={styles.content}>{book.volumeInfo.publisher}</Text></Text>
         <Text style={styles.heading}>Description: <Text style={styles.content}>{book.volumeInfo.description}</Text></Text>
       </View>
-      <TouchableOpacity style={styles.favoriteButton} onPress={toggleFavorite}>
-        <Icon name={isFavorite ? 'favorite' : 'favorite-border'} size={30} color="red" />
+      <TouchableOpacity style={styles.favouriteButton} onPress={toggleFavourite}>
+        <Icon name={isFavourite ? 'favorite' : 'favorite-border'} size={30} color="red" />
       </TouchableOpacity>
     </ScrollView>
   );
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   content: {
     fontWeight: 'normal',
   },
-  favoriteButton: {
+  favouriteButton: {
     position: 'absolute',
     top: 20,
     right: 20,

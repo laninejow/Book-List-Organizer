@@ -1,23 +1,24 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Dimensions } from 'react-native';
 
-import favoritesImage from '../assets/favorite.png';
+import favouritesImage from '../assets/favorite.png';
 import currentlyReadingImage from '../assets/currently-reading.png';
 import readImage from '../assets/read.png';
 
 const { width, height } = Dimensions.get('window');
 
+// Book List Navigation
 const BookOrganizerScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Favorites')}>
+      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Favourites')}>
         <ImageBackground
-          source={favoritesImage}
+          source={favouritesImage}
           style={styles.image}
           imageStyle={{ borderRadius: 10 }}
         >
           <View style={styles.textContainer}>
-            <Text style={styles.text}>Favorites</Text>
+            <Text style={styles.text}>Favourites</Text>
           </View>
         </ImageBackground>
       </TouchableOpacity>
@@ -55,29 +56,28 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 0.05 * height, // Adjust font size based on screen height
+    fontSize: 0.05 * height, 
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
   },
   card: {
-    width: '90%', // 90% of the screen width
-    height: height * 0.2, // 20% of the screen height
+    width: '90%', 
+    height: height * 0.2, 
     marginBottom: 20,
   },
   image: {
     flex: 1,
-    justifyContent: 'flex-end', // Align content to the bottom
+    justifyContent: 'flex-end', 
   },
   textContainer: {
-   
     padding: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
   text: {
     color: 'white',
-    fontSize: 0.03 * height, // Adjust font size based on screen height
+    fontSize: 0.03 * height,
     fontWeight: 'bold',
     textAlign: 'left',
   },
