@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Modal, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -58,6 +58,18 @@ const CurrentlyReadingScreen = ({ navigation }) => {
     }
   };
 
+  const confirmDelete = () => {
+    Alert.alert(
+      "Delete Confirmation",
+      "Are you sure you want to delete this book?",
+      [
+        { text: "Cancel", onPress: () => setModalVisible(false), style: "cancel" },
+        { text: "OK", onPress: deleteBook }
+      ],
+      { cancelable: true }
+    );
+  };
+
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('BookDetails', { book: item })} style={styles.item}>
       <View style={styles.bookDetails}>
@@ -73,7 +85,7 @@ const CurrentlyReadingScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {currentlyReading.length === 0 ? (
-        <Text style={styles.noBooks}>No books currently being read</Text>
+        <Text style={styles.noBooks}>No currently reading books</Text>
       ) : (
         <FlatList
           data={currentlyReading}
@@ -95,7 +107,7 @@ const CurrentlyReadingScreen = ({ navigation }) => {
             <TouchableOpacity style={styles.modalItem} onPress={() => moveToCategory('read')}>
               <Text style={styles.modalText}>Move to Read</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.modalItem} onPress={deleteBook}>
+            <TouchableOpacity style={styles.modalItem} onPress={confirmDelete}>
               <Text style={[styles.modalText, { color: 'red' }]}>Delete</Text>
             </TouchableOpacity>
           </View>
