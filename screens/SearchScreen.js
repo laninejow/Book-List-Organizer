@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '80%',
   },
+  buttonText:{
+    color:'black',
+  }
 });
 
 export default SearchScreen;

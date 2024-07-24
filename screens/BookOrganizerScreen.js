@@ -5,12 +5,12 @@ import favoritesImage from '../assets/favorite.png';
 import currentlyReadingImage from '../assets/currently-reading.png';
 import readImage from '../assets/read.png';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const BookOrganizerScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.title}>Book Shelf</Text> */}
+      <Text style={styles.title}>Book Shelf</Text>
       <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Favorites')}>
         <ImageBackground
           source={favoritesImage}
@@ -54,38 +54,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'black',
   },
   title: {
-    fontSize: 32,
+    fontSize: 0.05 * height, // Adjust font size based on screen height
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
   },
   card: {
-    width: width * 0.9, 
-    height: 175,
+    width: '90%', // 90% of the screen width
+    height: height * 0.2, // 20% of the screen height
     marginBottom: 20,
   },
   image: {
     flex: 1,
-    justifyContent: 'flex-end', 
+    justifyContent: 'flex-end', // Align content to the bottom
   },
   textContainer: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
   text: {
     color: 'white',
-    fontSize: 24,
+    fontSize: 0.03 * height, // Adjust font size based on screen height
     fontWeight: 'bold',
     textAlign: 'left',
   },
-  title:{
-    color:'white',
-    fontSize: 45,
-  }
 });
 
 export default BookOrganizerScreen;

@@ -98,9 +98,6 @@ const ReadScreen = ({ navigation }) => {
             <TouchableOpacity style={styles.modalItem} onPress={deleteBook}>
               <Text style={[styles.modalText, { color: 'red' }]}>Delete</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.modalItem} onPress={() => setModalVisible(false)}>
-              <Text style={styles.modalText}>Cancel</Text>
-            </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </Modal>
