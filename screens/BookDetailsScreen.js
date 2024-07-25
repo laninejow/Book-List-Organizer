@@ -42,6 +42,7 @@ const BookDetailsScreen = ({ route }) => {
     }
   };
 
+  // Grabs the book information (Title, Author, Publisher, Description) from API and displays
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail && (
@@ -59,7 +60,7 @@ const BookDetailsScreen = ({ route }) => {
     </ScrollView>
   );
 };
-
+// styles
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
